@@ -934,6 +934,15 @@ footer {
     font-size: 0.8rem;
   }
 
+  .phone-link, .location-link, .lang-toggle {
+    display: inline-block;
+    margin: 0 0.5rem;
+  }
+
+  .lang-toggle {
+    transform: none;
+  }
+
   .hero-content h1 {
     font-size: 2rem;
   }
