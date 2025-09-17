@@ -1,0 +1,163 @@
+/* Promo Popup */
+.promo-popup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  z-index: 9999;
+  transition: all 0.4s ease;
+}
+
+.promo-popup.peek {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  justify-content: flex-end;
+  align-items: center;
+  pointer-events: none;   /* <<< disable overlay clicks */
+}
+
+/* Disable overlay clicks but allow modal clicks */
+.promo-popup.peek::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* overlay ignores clicks */
+}
+/* When peeking → content shrinks + slides */
+.promo-popup.peek .promo-popup-content {
+  pointer-events: auto;   /* <<< box stays clickable */
+  transform: translateX(80%) scale(0.75);
+  cursor: pointer;
+  transition: transform 0.5s ease;}
+
+/* =====================
+   Popup Content
+===================== */
+.promo-popup-content {
+    
+  pointer-events: auto; /* clickable even in peek */
+
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  padding: 2.5rem;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  
+}
+
+/* Glow shimmer effect */
+.promo-popup-content::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: skewX(-20deg);
+  animation: shimmer 1.6s ease forwards;
+}
+
+@keyframes shimmer {
+  0% { left: -75%; }
+  100% { left: 125%; }
+}
+
+/* =====================
+   Text
+===================== */
+.twenty {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.offer {
+  font-size: 1.2rem;
+  color: #e0f7ff;
+  margin-top: 0.5rem;
+}
+
+/* =====================
+   Close Button
+===================== */
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  font-size: 1.6rem;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.close-btn:hover {
+  color: #00bfff;
+  transform: rotate(90deg);
+}
+
+/* =====================
+   Claim Offer Button
+===================== */
+.promo-btn {
+  position: relative;
+  overflow: hidden;
+  background: rgba(0, 174, 255, 0.35);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 14px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.5rem;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.promo-btn::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.6),
+    transparent
+  );
+  transform: skewX(-20deg);
+}
+
+.promo-btn:hover::after {
+  left: 125%;
+  transition: left 0.8s ease;
+}
+
+.promo-btn:hover {
+  background: rgba(0, 174, 255, 0.55);
+  box-shadow: 0 8px 24px rgba(0, 174, 255, 0.4);
+  transform: translateY(-2px);
+}
